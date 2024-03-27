@@ -7,8 +7,7 @@ Modular's internal workflows. The roadmap updates act as a forcing function for
 discussions with the Mojo community to ensure the standard library contributors
 both internally and externally are aligned on the future technical direction.
 
-For more about our long-term aspirations, check out our [Vision doc](vision.md).
-
+## 2024 Q2+ roadmap
 ## 2024 Q2+ roadmap
 
 The following are high-level themes the Mojo standard library team will be
@@ -17,18 +16,29 @@ library are still in early development and many features will land in the
 months ahead. Currently, that means we are focused on the core system
 programming features that are essential to [Mojo's
 mission](https://docs.modular.com/mojo/why-mojo).
+The following are high-level themes the Mojo standard library team will be
+working on over the next 6 months. Keep in mind that Mojo and the Mojo standard
+library are still in early development and many features will land in the
+months ahead. Currently, that means we are focused on the core system
+programming features that are essential to [Mojo's
+mission](https://docs.modular.com/mojo/why-mojo).
 
+### Core library improvements
 ### Core library improvements
 
 - Remove `AnyRegType` in the standard library in favor of `AnyType`.
+- Remove `AnyRegType` in the standard library in favor of `AnyType`.
 
+- Unify `Pointer` and `AnyPointer`.
 - Unify `Pointer` and `AnyPointer`.
 
 - Apply `Reference` types and lifetimes throughout APIs and types.
 
 - Design API conventions and expected behavior for core collection types such
   as `List`, `String`, and `Dict`.
+  as `List`, `String`, and `Dict`.
 
+### Generic programming improvements
 ### Generic programming improvements
 
 - Define core traits for generic programming models.
@@ -37,12 +47,16 @@ mission](https://docs.modular.com/mojo/why-mojo).
 
 - Standardize collection meta type names (such as *element_type*, *key_type*,
   and *value_type*).
+- Standardize collection meta type names (such as *element_type*, *key_type*,
+  and *value_type*).
 
+### Improve Python interop
 ### Improve Python interop
 
 - Improve `PythonObject` (including `object`) using new Mojo language
   features.
 
+### Performance improvements
 ### Performance improvements
 
 - Set up performance benchmarking infrastructure along with regression tests for

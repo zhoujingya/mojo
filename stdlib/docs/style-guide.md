@@ -1,16 +1,29 @@
 # Coding standards & style guide
+# Coding standards & style guide
 
+This document describes conventions that Mojo standard library code should
+adhere to. Its coverage ranges from non-semantic conventions like code
+formatting, to semantics like value lifecycle behavior that standard library
 This document describes conventions that Mojo standard library code should
 adhere to. Its coverage ranges from non-semantic conventions like code
 formatting, to semantics like value lifecycle behavior that standard library
 types should generally conform to.
 
 ## Structure and formatting
+## Structure and formatting
 
+### Files & layout
 ### Files & layout
 
 #### File structure
+#### File structure
 
+The Mojo standard library uses the following high-level organization:
+
+- Group related functions within the same file.
+- Group related files within the same directory.
+- Do not add dependencies to the `stdlib` module because, by definition, it is
+required to be a leaf dependency.
 The Mojo standard library uses the following high-level organization:
 
 - Group related functions within the same file.
@@ -33,9 +46,11 @@ required to be a leaf dependency.
 All Mojo source files must end with the extension `.mojo` or `.🔥`.
 
 #### Mojo format
+#### Mojo format
 
 Mojo provides a command line formatting utility, `mojo format`, designed to
 automatically format your code according to the official Mojo style guidelines.
+It adjusts indentation, spacing, and line breaks, making code more readable and
 It adjusts indentation, spacing, and line breaks, making code more readable and
 consistent.
 
@@ -45,6 +60,7 @@ All done! ✨ 🍰 ✨
 1 file left unchanged.
 ```
 
+Unless otherwise noted, Mojo standard library code should follow the formatting
 Unless otherwise noted, Mojo standard library code should follow the formatting
 produced by `mojo format`.
 
@@ -64,8 +80,15 @@ and that's it!
 
 - Use vertical whitespace only as needed to organize code into logical sections.
 
+*We encourage updating your editor settings to be consistent with the above.*
+
+#### Column limit
+
+Mojo code has a column limit (line length) of 80 characters.
+
 #### File license header
 
+Every file in the open source Mojo standard library should begin with the
 Every file in the open source Mojo standard library should begin with the
 following license information header:
 
@@ -85,7 +108,9 @@ following license information header:
 ```
 
 #### Code header comments
+#### Code header comments
 
+Code in the Mojo standard library should use the following conventional
 Code in the Mojo standard library should use the following conventional
 structure of header comments separating the various kinds of methods that can be
 defined on structs.
@@ -97,6 +122,7 @@ defined on structs.
 
 
 struct MyStruct(Sized, Stringable):
+    """Description goes here."""
     """Description goes here."""
 
     var field: Int
@@ -125,13 +151,6 @@ struct MyStruct(Sized, Stringable):
 
 ## Code conventions
 
-### Python Standard Library
-
-We want to be a good member of the Python family and aim to become a full
-superset, so we inherit naming from the Python standard library, including any
-inconsistencies. These naming inconsistencies are the only exceptions to the
-naming conventions outlined below.
-
 ### Identifier naming conventions
 
 There are several ways to capitalize and separate words, known as "case
@@ -149,7 +168,9 @@ This first table is just a definition of the various "case styles."
 | `flatcase`             | All lowercase without separators          | `basename`
 
 The following table shows our preferred use of different case styles.
+The following table shows our preferred use of different case styles.
 
+| Code kind            | Example                        | Case style
 | Code kind            | Example                        | Case style
 |----------------------|--------------------------------|---------------------------
 | `fn` / `def`         | `fn engage_hyperdrive()`       | `snake_case`
@@ -174,7 +195,14 @@ conventions already established in that module. Therefore, if the module you
 are working on uses a different style, continue using that style to maintain
 consistency. We are not currently accepting pull requests that propose
 extensive formatting or renaming changes.
+Although these are our style conventions, not all code currently adheres to it.
+When preparing a new change, it is important to adhere to the style and naming
+conventions already established in that module. Therefore, if the module you
+are working on uses a different style, continue using that style to maintain
+consistency. We are not currently accepting pull requests that propose
+extensive formatting or renaming changes.
 
+### Naming guidelines
 ### Naming guidelines
 
 #### ℹ️ Prefer descriptive parameter names over single-letter names
@@ -191,6 +219,7 @@ struct Array[LENGTH: Int, ElementType: Movable] # 🔴 Avoid
 struct Array[ElementType: Movable, Length: Int] # 🟢 Preferred
 ```
 
+### Container lifecycle semantics
 ### Container lifecycle semantics
 
 #### ℹ️ Prefer explicit copy constructors; avoid allowing implicit copies
@@ -209,6 +238,7 @@ can be expensive. This includes common types like `List`, `Dict`, `Set`,
 `Tensor`, and `String`.
 
 Some standard library types allow implicit copies where they shouldn’t. We will
+Some standard library types allow implicit copies where they shouldn’t. We will
 resolve this shortly as new Mojo language features are shipped to help with this
 very situation.
 
@@ -216,6 +246,7 @@ When designing a new type, don’t allow implicit copies unless
 the copy is trivial (order `O(1)`). In other words, don’t define a
 `__copyinit__()` function if the copy is expensive. Instead, define an
 *explicit* copy constructor: an `__init__()` constructor that takes a value of
+the same type:
 the same type:
 
 ```mojo
@@ -226,7 +257,11 @@ struct MyStruct:
 ```
 
 ### Import statements
+### Import statements
 
+- Explicitly import entities used (functions, structs, aliases), rather
+  than rely on transitive imports.
+- Import only what you use; in general, avoid using
 - Explicitly import entities used (functions, structs, aliases), rather
   than rely on transitive imports.
 - Import only what you use; in general, avoid using
@@ -234,19 +269,26 @@ struct MyStruct:
 - Import statements should be sorted lexicographically.
 
 ### API docstrings
+### API docstrings
 
+Every public function and public struct (including data fields) in the standard
+library must have docstrings (code comments that describe the API behavior).
+Mojo includes tooling to ensure that public functions include docstrings.
 Every public function and public struct (including data fields) in the standard
 library must have docstrings (code comments that describe the API behavior).
 Mojo includes tooling to ensure that public functions include docstrings.
 
 You can run `./stdlib/scripts/check-doc-strings.sh` to validate
 docstrings. If the command exits with a `0` exit code, the docstrings are
+docstrings. If the command exits with a `0` exit code, the docstrings are
 compliant; otherwise, an error will be shown. This is also enforced by the LSP
 with warnings for anything that doesn’t conform, you can generate docstrings
 based on the signature using an LSP Quick Fix:
 
 <img src="./images/doc-lint-quick-fix.png" width=350 />
+<img src="./images/doc-lint-quick-fix.png" width=350 />
 
+We follow Google's Python convention for
 We follow Google's Python convention for
 [docstrings outlined here](https://google.github.io/styleguide/pyguide.html#383-functions-and-methods)
 which looks like this:
@@ -286,6 +328,7 @@ fn add_param_arg[foo: Int](bar: Int) -> Int:
 
 ### Testing
 
+#### Unit test filenames
 #### Unit test filenames
 
 All test filenames should be prefixes with `test_`.

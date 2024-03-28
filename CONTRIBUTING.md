@@ -1,5 +1,4 @@
 # Mojo contributor guide
-# Mojo contributor guide
 
 Welcome to the Mojo community! 🔥 We’re very excited that you’re interested in
 contributing to the project. To help you get started and ensure a smooth
@@ -9,7 +8,6 @@ There are many ways to contribute to the project, from joining the
 [Discord community](https://www.discord.gg/modular), to filing bugs, to
 contributing documentation, examples, or code.
 
-## Submitting bugs
 ## Submitting bugs
 
 Reporting issues is a great way to contribute to the project. Mojo uses GitHub
@@ -24,28 +22,23 @@ submitted issues to avoid creating duplicate issues for the maintainers to
 address.
 
 ### Writing high-quality bugs
-### Writing high-quality bugs
 
 We encourage you to provide as much information about the issue as practical.
 The more details you provide, the faster we can resolve the issue. The following
 is a template of the information that should accompany every submitted issue.
 
 #### Issue template
-#### Issue template
 
 - **Summary.** A descriptive summary of the issue.
 - **Description.** A detailed account of the bug, including what was expected
   and what occurred.
 - **Environment details.**
-- **Environment details.**
   - Mojo Compiler Version
   - Operating System version
   - Hardware Specifications
 - **Severity/frequency.** An assessment of the impact ranging from inconvenience
-- **Severity/frequency.** An assessment of the impact ranging from inconvenience
   to a blocker.
 
-## Contributing to docs and examples
 ## Contributing to docs and examples
 
 We’re happy to accept pull requests for the docs and examples.
@@ -75,7 +68,6 @@ See [Pull Requests](#pull-requests) for information on creating your first pull
 request.
 
 ## Contributing to the standard library
-## Contributing to the standard library
 
 The standard library team is dedicated to creating a vibrant technical community
 around the Mojo programming language. Our vision includes a diverse and
@@ -93,12 +85,10 @@ For technical details on developing for the standard library, see the following
 documents:
 
 - [Developing the standard library](./stdlib/docs/development.md) covers building,
-- [Developing the standard library](./stdlib/docs/development.md) covers building,
   testing, and other information you’ll need to work in the standard library.
 - [Coding Standards and Style Guide](./stdlib/docs/style-guide.md) provides
   guidelines for writing code for the standard library.
 
-### Accepting open source PRs
 ### Accepting open source PRs
 
 To ensure a streamlined process, contributors are encouraged to focus on
@@ -164,7 +154,6 @@ open-source projects. We’ll add more documentation in the future as we gain
 experience with the process.
 
 ## Pull requests
-## Pull requests
 
 You can use a pull request to propose a change or bug fix to the Mojo Standard
 Library, Mojo examples, or Mojo documentation. This page gives an overview of
@@ -174,9 +163,7 @@ the process, especially for first-time contributors.
 which represents the most recent nightly build.
 
 ### Pull request process
-### Pull request process
 
-#### First-time checklist
 #### First-time checklist
 
 Before you start your first pull request, please complete this checklist:
@@ -185,12 +172,10 @@ Before you start your first pull request, please complete this checklist:
 - Read the [Code of Conduct](./CODE_OF_CONDUCT.md).
 
 #### Evaluate and get buy-in on the change
-#### Evaluate and get buy-in on the change
 
 We want to be sure that you spend your time efficiently and prepare changes that
 aren’t controversial and get stuck in long rounds of reviews. See the sections
 on [Contributing to Docs and Examples](#contributing-to-docs-and-examples) and
-[Contributing to the standard library](#contributing-to-the-standard-library)
 [Contributing to the standard library](#contributing-to-the-standard-library)
 for more details.
 
@@ -360,7 +345,6 @@ By making a contribution to this project, I certify that:
     this project or the open source license(s) involved.
 ```
 
-### Review time SLA
 ### Review time SLA
 
 The team commits to reviewing submitted pull requests within a week of

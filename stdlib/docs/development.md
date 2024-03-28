@@ -1,7 +1,5 @@
 # Mojo standard library development
-# Mojo standard library development
 
-This document covers the essentials of developing for the standard library.
 This document covers the essentials of developing for the standard library.
 
 ## Prerequisites
@@ -20,26 +18,7 @@ And if you're using VS Code:
   extension](https://marketplace.visualstudio.com/items?itemName=modular-mojotools.vscode-mojo-nightly)
 
 ## Building the standard library
-## Prerequisites
 
-If this is your first time contributing, first read everything in
-[CONTRIBUTING.md](../../CONTRIBUTING.md#fork-and-clone-the-repo). Logistically,
-you need to do the following:
-
-1. [Fork and clone the repo](../../CONTRIBUTING.md#fork-and-clone-the-repo)
-2. [Branch off nightly](../../CONTRIBUTING.md#branching-off-nightly)
-3. [Install the nightly Mojo compiler](../../CONTRIBUTING.md#getting-the-nightly-mojo-compiler)
-
-And if you're using VS Code:
-
-- [Install the nightly VS Code
-  extension](https://marketplace.visualstudio.com/items?itemName=modular-mojotools.vscode-mojo-nightly)
-
-## Building the standard library
-
-To build the standard library, you can run the
-[`build-stdlib.sh`](../scripts/build-stdlib.sh) script from the
-`mojo/stdlib/scripts/` directory. This will create a build artifacts directory,
 To build the standard library, you can run the
 [`build-stdlib.sh`](../scripts/build-stdlib.sh) script from the
 `mojo/stdlib/scripts/` directory. This will create a build artifacts directory,
@@ -50,9 +29,7 @@ To build the standard library, you can run the
 ```
 
 ## Testing the standard library
-## Testing the standard library
 
-### Installing unit test dependencies
 ### Installing unit test dependencies
 
 To run the unit tests, you first need to install `lit`:
@@ -82,43 +59,9 @@ In the near future, we will be moving away from `FileCheck` in favor of writing
 the unit tests using our own `testing` module and remove this dependency
 requirement for contributors. We are happy to welcome contributions in this
 area!
-To run the unit tests, you first need to install `lit`:
-
-```bash
-python3 -m pip install lit
-```
-
-And make sure that `FileCheck` from LLVM is on path. If your are on macOS, you
-can `brew install llvm` and add it to your path in `~/.zshrc` or `~/.bashrc`:
-
-```bash
-export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
-```
-
-If you are on Ubuntu you can:
-
-```bash
-sudo apt update
-
-sudo apt install llvm
-```
-
-And it will be available in `PATH`.
-
-In the near future, we will be moving away from `FileCheck` in favor of writing
-the unit tests using our own `testing` module and remove this dependency
-requirement for contributors. We are happy to welcome contributions in this
-area!
 
 ### Running the standard library tests
-### Running the standard library tests
 
-We provide a simple Bash script to build the standard library package and
-`test_utils` package that is used by the test suite.
-
-Just run `./stdlib/scripts/run-tests.sh` which will produce the necessary
-`mojopkg` files inside your `build` directory, and then run `lit -sv
-stdlib/test`.
 We provide a simple Bash script to build the standard library package and
 `test_utils` package that is used by the test suite.
 
@@ -130,14 +73,7 @@ stdlib/test`.
 ./stdlib/scripts/run-tests.sh
 
 lit -sv stdlib/test
-
-lit -sv stdlib/test
 ```
-
-All the tests should pass on the `nightly` branch with the nightly Mojo
-compiler. If you've pulled the latest changes and they're still failing please
-[open a GitHub
-issue](https://github.com/modularml/mojo/issues/new?assignees=&labels=bug%2Cmojo&projects=&template=mojo_bug_report.yaml&title=%5BBUG%5D).
 
 All the tests should pass on the `nightly` branch with the nightly Mojo
 compiler. If you've pulled the latest changes and they're still failing please
@@ -148,7 +84,6 @@ issue](https://github.com/modularml/mojo/issues/new?assignees=&labels=bug%2Cmojo
 
 If you’d like to run just a subset of the tests, feel free to use all of the
 normal options that the `lit` tool provides.  For example, to run just the
-`builtin` and `collections` tests:
 `builtin` and `collections` tests:
 
 ```bash
@@ -171,31 +106,21 @@ If you run into any issues when running the tests,
 a look.
 
 ## Formatting changes
-## Formatting changes
 
-Please make sure your changes are formatted before submitting a pull request.
 Please make sure your changes are formatted before submitting a pull request.
 Otherwise, CI will fail in its lint and formatting checks.  The `mojo` compiler
 provides a `format` command.  So, you can format your changes like so:
 
 ```bash
-mojo format ./
+mojo format <file1> <file2> ...
 ```
 
-It is advised, to avoid forgetting, to set-up `pre-commit`, which will format
-your changes automatically at each commit, and will also ensure that you
-always have the latest linting tools applied.
+You can also do this before submitting a pull request by running it on the
+relevant files changed compared to the remote:
 
-To do so, install pre-commit:
 ```bash
-pip install pre-commit
-pre-commit install
+git diff origin/main --name-only -- '*.mojo' | xargs mojo format
 ```
-and that's it!
-
-If you need to manually apply the `pre-commit`, for example, if you
-made a commit with the github UI, you can do `pre-commit run --all-files`,
-and it will apply the formatting to all Mojo files.
 
 You can also consider setting up your editor to automatically format
 Mojo files upon saving.

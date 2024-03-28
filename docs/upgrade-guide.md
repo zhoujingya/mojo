@@ -118,7 +118,7 @@ was unsafe with heap allocated objects, it now
 returns a reference. If you had code that looks like this:
 
 ```mojo
-from utils import Variant
+from utils.variant import Variant
 
 fn foo(variant: Variant[String, Int]):
     if variant.isa[String]():

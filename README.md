@@ -20,8 +20,6 @@ This repo has two primary branches:
 - The [`main`](https://github.com/modularml/mojo/tree/main) branch, which is in
 sync with the last stable released version of Mojo. Use the examples here if you’re
 using a [release build of Mojo](#latest-released).
-sync with the last stable released version of Mojo. Use the examples here if you’re
-using a [release build of Mojo](#latest-released).
 
 - The [`nightly`](https://github.com/modularml/mojo/tree/nightly) branch, which
 is in sync with the Mojo nightly build and subject to breakage. Use this branch
@@ -68,12 +66,7 @@ For more general questions or to chat with other Mojo developers, check out our
 
 This repository is licensed under the Apache License v2.0 with LLVM Exceptions
 (see the LLVM [License](https://llvm.org/LICENSE.txt)).
-## License
 
-This repository is licensed under the Apache License v2.0 with LLVM Exceptions
-(see the LLVM [License](https://llvm.org/LICENSE.txt)).
-
-## Thanks to our contributors
 ## Thanks to our contributors
 
 <a href="https://github.com/modularml/mojo/graphs/contributors">

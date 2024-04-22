@@ -610,6 +610,64 @@ struct String(Sized, Stringable, IntableRaising, KeyElement, Boolable):
         return not (self == other)
 
     @always_inline
+    fn __gt__(self, other: String) -> Bool:
+        """Compares two Strings if self greater than the other.
+
+        Args:
+            other: The rhs of the operation.
+
+        Returns:
+            True if self are greater than other string.
+        """
+        if self == other:
+            return False
+        var _self = self._as_ptr()
+        var _other = other._as_ptr()
+        var _self_len = self.__len__()
+        var _other_len = other.__len__()
+        var len = _other_len if _self_len > _other_len else _self_len
+        var cmp = memcmp(_self, _other, len)
+        if cmp == 0:
+            return True if _self_len > _other_len else False
+        return True if cmp > 0 else False
+
+    @always_inline
+    fn __ge__(self, other: String) -> Bool:
+        """Compares two Strings if self greater equal the other.
+
+        Args:
+            other: The rhs of the operation.
+
+        Returns:
+            True if self are greater equal the other string.
+        """
+        return self == other or self > other
+
+    @always_inline
+    fn __lt__(self, other: String) -> Bool:
+        """Compares two Strings if self less than the other.
+
+        Args:
+            other: The rhs of the operation.
+
+        Returns:
+            True if self are less than other string.
+        """
+        return self != other and not self > other
+
+    @always_inline
+    fn __le__(self, other: String) -> Bool:
+        """Compares two Strings if self less equal the other.
+
+        Args:
+            other: The rhs of the operation.
+
+        Returns:
+            True if self are less equal other string.
+        """
+        return self == other or self < other
+
+    @always_inline
     fn __add__(self, other: String) -> String:
         """Creates a string by appending another string at the end.
 

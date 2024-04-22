@@ -101,6 +101,20 @@ fn test_equality_operators() raises:
     assert_not_equal(s0, "notabc")
 
 
+fn test_compare_operators() raises:
+    assert_true("feefef".__str__().__gt__("feefe".__str__()))
+    assert_false("hello".__str__().__gt__("hello".__str__()))
+    assert_true("hello".__str__().__ge__("hello".__str__()))
+    assert_false("hello".__str__().__lt__("hello".__str__()))
+    assert_true("hello".__str__().__le__("hello".__str__()))
+    assert_false("apple".__str__().__gt__("banana".__str__()))
+    assert_false("apple".__str__().__gt__("banana".__str__()))
+    assert_true("apple".__str__().__gt__("Banana").__str__())
+    assert_false("apple123".__str__().__gt__("apple456".__str__()))
+    assert_false("appl2$".__str__().__gt__("banana".__str__()))
+    assert_false("".__str__().__gt__("a".__str__()))
+
+
 fn test_add() raises:
     var s1 = String("123")
     var s2 = String("abc")
